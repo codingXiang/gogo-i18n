@@ -31,7 +31,7 @@ func main() {
 	)
 	//儲存資料至檔案中
 	StoreDataToFile("yaml", "/Users/user/go/src/pkg/gogo-i18n/example", i18nDatas)
-	LangHandler = NewLanguageHandler(language.TraditionalChinese)
+	LangHandler = NewLanguageHandler()
 	// 建立 GoGoi18n 物件，預設語言為中文
 	lang, _ := LangHandler.GetLanguageTag("zh-Han")
 	GGi18n = NewGoGoi18n(lang)
