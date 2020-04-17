@@ -30,17 +30,16 @@ func main() {
 		}
 	)
 	//儲存資料至檔案中
-	StoreDataToFile("yaml", "/Users/user/go/src/pkg/gogo-i18n/example", i18nDatas)
+	StoreDataToFile("yaml", "./example", i18nDatas)
 	LangHandler = NewLanguageHandler()
-	// 建立 GoGoi18n 物件，預設語言為中文
-	lang, _ := LangHandler.GetLanguageTag("zh-Han")
+	// 建立 GoGoi18n 物件，預設語言為英文
+	lang, _ := LangHandler.GetLanguageTag("en")
 	GGi18n = NewGoGoi18n(lang)
 	// 設定 Config 類別
 	GGi18n.SetFileType("yaml")
 	// 讀取 語言檔案
-	GGi18n.LoadTranslationFile("/Users/user/go/src/pkg/gogo-i18n/example",
-		language.TraditionalChinese,
-		language.English)
+	GGi18n.LoadTranslationFileArray("./example",
+		ServerLanguage)
 	// 正確訊息翻譯
 	msg := GGi18n.GetMessage("orm.create.success", map[string]interface{}{
 		"Data": "User",
@@ -53,8 +52,8 @@ func main() {
 	fmt.Println(msg)
 	fmt.Println(msgErr)
 
-	//更換語言別為英文
-	lang1, _ := LangHandler.GetLanguageTag("en")
+	//更換語言別為中文
+	lang1, _ := LangHandler.GetLanguageTag("zh_Hant")
 	GGi18n.SetUseLanguage(lang1)
 	msg1 := GGi18n.GetMessage("orm.create.success", map[string]string{
 		"Data": "User",

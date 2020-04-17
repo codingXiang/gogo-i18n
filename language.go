@@ -12,10 +12,9 @@ type (
 // 預設搜尋的語系，可以自行增加
 var (
 	ServerLanguage = []language.Tag{
+		language.English,
 		language.TraditionalChinese,
 		language.SimplifiedChinese,
-		language.English,
-		language.Japanese,
 	}
 	LangHandler LanguageHandlerInterface
 )
