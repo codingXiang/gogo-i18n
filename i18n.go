@@ -17,6 +17,7 @@ type (
 		SetFileType(t string) error
 		SetUseLanguage(lang language.Tag)
 		LoadTranslationFile(path string, langs ...language.Tag) error
+		LoadTranslationFileArray(path string, langs []language.Tag) error
 		GetMessage(messageID string, data interface{}) string
 	}
 	//GoGoi18n 封裝 go-i18n 的結構
@@ -70,6 +71,17 @@ func (i *GoGoi18n) SetUseLanguage(lang language.Tag) {
 
 //LoadTranslationFile 讀取翻譯檔
 func (i *GoGoi18n) LoadTranslationFile(path string, langs ...language.Tag) error {
+	for _, lang := range langs {
+		f := path + "/" + i.fileType + "/" + lang.String() + "." + i.fileType
+		if _, err := i.bundle.LoadMessageFile(f); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+//LoadTranslationFile 讀取翻譯檔
+func (i *GoGoi18n) LoadTranslationFileArray(path string, langs []language.Tag) error {
 	for _, lang := range langs {
 		f := path + "/" + i.fileType + "/" + lang.String() + "." + i.fileType
 		if _, err := i.bundle.LoadMessageFile(f); err != nil {
